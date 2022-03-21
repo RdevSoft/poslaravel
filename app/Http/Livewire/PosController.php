@@ -161,5 +161,17 @@ class PosController extends Component
 
         }
 
+        /**metodo para limpiar carrito*/
+
+        public funciont clearCart()
+    {
+        Cart::clear();
+        $this->efectivo = 0;
+        $this->change = 0;
+        $this->total = 0;
+        $this->total = Cart::getTotal();
+        $this->itemQuantity = Cart::getTotalQuanity();
+        $this->emit('scan-ok', 'Carrito vaciado');
+    }
     }
 }
