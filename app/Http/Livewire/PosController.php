@@ -83,22 +83,22 @@ class PosController extends Component
     {
         $exist = Cart::get($productId, $cant = 1);
         {
-            $title ='';
+            $title = '';
             $product = Product::find($productId);
             $exist = Cart::get($productId);
-            if($exist)
+            if ($exist)
                 $title = 'Cantidad actualizada';
             else
                 $title = 'Producto agregado';
-            if($exist)
-            {
-                if($product->stock < ($cant + $exist->quantity)) /**si las existencia producto son menos a la suma de la cantidad que se
+            if ($exist) {
+                if ($product->stock < ($cant + $exist->quantity)) /**si las existencia producto son menos a la suma de la cantidad que se
                  * quiere agregar mas lo que ya hay en el carrito*/ {
                     $this->emit('no-stock', 'Stock insuficiente:/');
                     return;
                 }
             }
-            Cart:add($product->id, $product->name, $product->price, $cant, $product->image);
+            Cart:
+            add($product->id, $product->name, $product->price, $cant, $product->image);
 
             /**actualizar el total del carrito*/
 
@@ -115,15 +115,13 @@ class PosController extends Component
         $title = '';
         $product = Product::find($productId);
         $exist = Cart::get($productId);
-        if($exist)
+        if ($exist)
             $title = 'Cantidad actualizada';
         else
             $title = 'Producto agregado';
-        if($exist)
-        {
+        if ($exist) {
             /** si la existencia del producto en stock es menor a la cantidad */
-            if($product->stock < $cant)
-            {
+            if ($product->stock < $cant) {
                 $this->emit('no-stock', 'Stock insuficiente:/');
                 return;
             }
@@ -131,13 +129,12 @@ class PosController extends Component
 
         $this->removeItem($productId);
 
-        if($cant > 0)
-        {
+        if ($cant > 0) {
             Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
             $this->total = Cart::getTotal();
             $this->itemQuantity = Cart::getTotalQuanity();
             $this->emit('scan-ok', $title);
-        }else
+        } else
             $this->emit('scan-error', 'La cantidad debe ser mayor a 0');
     }
 
@@ -149,5 +146,20 @@ class PosController extends Component
         $this->emit('scan-ok', 'Producto eliminado');
     }
 
-    
+    public function decreaseQty($productId)
+    {
+        $item = Cart::get($productId);
+        Cart::remove($productId);
+
+        $newQty = ($item->quantity) - 1;
+        if ($newQty > 0) {
+            Cart::add($item->id, $item->name, $item->price, $newQty, $item->image);
+            $this->total = Cart::getTotal();
+            $this->itemQuantity = Cart::getTotalQuanity();
+            $this->emit('scan-ok', 'Cantidad actualizada');
+
+
+        }
+
+    }
 }
