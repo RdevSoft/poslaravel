@@ -1,4 +1,4 @@
-// Search 1
+// SearchController 1
 
 $('#input-search').on('keyup', function() {
   var rex = new RegExp($(this).val(), 'i');
@@ -9,7 +9,7 @@ $('#input-search').on('keyup', function() {
 });
 
 
-// Search 2
+// SearchController 2
 document.getElementsByClassName('full-search')[0].addEventListener('click', function() {
     this.classList.add("input-focused");
     document.getElementsByClassName('demo-search-overlay')[0].classList.add("show");

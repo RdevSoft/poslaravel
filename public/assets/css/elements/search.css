@@ -9,7 +9,7 @@
 	===============================
 */
 /*
-  Live Search
+  Live SearchController
 */
 .filtered-list-search {
   margin-top: 0;
@@ -116,7 +116,7 @@
     color: #1b55e2; }
 
 /*
-    Line Search
+    Line SearchController
 */
 .full-search.search-form-overlay {
   height: 50px;
@@ -195,7 +195,7 @@
     opacity: .1; }
 
 /*
-    Search Box
+    SearchController Box
 */
 .search-input-group-style.input-group {
   -webkit-box-shadow: 0px 0px 0px 1px rgba(136, 142, 168, 0.313725);

@@ -93,7 +93,7 @@ $(document).ready(function() {
 				getItemsGroupCheckboxes[i].parentNode.parentNode.parentNode;
 
 				getItemsCheckboxes = document.querySelectorAll('.'+getItemsGroupCheckboxes[i].parentNode.parentNode.parentNode.className.split(' ')[0] + ' ' + getActiveListID + ' .inbox-chkbox');
-				
+
 				if (getItemsCheckboxes[i].checked) {
 					getItemsCheckboxes[i].checked = false;
 				} else {
@@ -152,7 +152,7 @@ $(document).ready(function() {
 	    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 	}
 
-	// Search on each key pressed
+	// SearchController on each key pressed
 
 	$('.input-search').on('keyup', function() {
 	  var rex = new RegExp($(this).val(), 'i');
@@ -293,7 +293,7 @@ $(document).ready(function() {
 	})
 
 	$('#composeMailModal').on('hidden.bs.modal', function (e) {
-	    
+
 	  	$(this)
 	    .find("input,textarea")
 	       .val('')
@@ -307,7 +307,7 @@ $(document).ready(function() {
 	    }
 	})
 
-	
+
 	/*
 		=========================
 			Tab Functionality
@@ -606,7 +606,7 @@ $(document).ready(function() {
 				for (var i = 0; i < $_mailAttachment.files.length; ++i) {
 				  	$outerAttachmentHTML += '<span class="">'+ $_mailAttachment.files.item(i).name +'</span>';
 
-				  	// Dectecting the format/type of the uploaded file for appling the icon/svg accordingly 
+				  	// Dectecting the format/type of the uploaded file for appling the icon/svg accordingly
 					if ($_mailAttachment.files.item(i).type.split('/')[0] === 'image') {
 						getSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
 					} else if ($_mailAttachment.files.item(i).type.split('/')[0] === 'application') {
@@ -828,7 +828,7 @@ $(document).ready(function() {
 			for (var i = 0; i < $_mailAttachment.files.length; ++i) {
 			  	$outerAttachmentHTML += '<span class="">'+ $_mailAttachment.files.item(i).name +'</span>'
 
-			  	// Dectecting the format/type of the uploaded file for appling the icon/svg accordingly 
+			  	// Dectecting the format/type of the uploaded file for appling the icon/svg accordingly
 				if ($_mailAttachment.files.item(i).type.split('/')[0] === 'image') {
 					getSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
 				} else if ($_mailAttachment.files.item(i).type.split('/')[0] === 'application') {
@@ -1042,7 +1042,7 @@ $(document).ready(function() {
 			for (var i = 0; i < $_mailAttachment.files.length; ++i) {
 			  	$outerAttachmentHTML += '<span class="">'+ $_mailAttachment.files.item(i).name +'</span>'
 
-			  	// Dectecting the format/type of the uploaded file for appling the icon/svg accordingly 
+			  	// Dectecting the format/type of the uploaded file for appling the icon/svg accordingly
 				if ($_mailAttachment.files.item(i).type.split('/')[0] === 'image') {
 					getSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
 				} else if ($_mailAttachment.files.item(i).type.split('/')[0] === 'application') {
@@ -1232,7 +1232,7 @@ $(document).ready(function() {
 			stopPropagations();
 			dynamicBadgeNotification('draftmail');
 	});
-	
+
 
 	/*
 		fn. $_GET_mailItem_Draft ==> Trigger when clicked on Draft Button in Modal.
@@ -1247,7 +1247,7 @@ $(document).ready(function() {
 			$('#btn-save').show();
 			$('#btn-reply-save').hide();
 			$('#btn-fwd-save').hide();
-			
+
 		    var $_mailFrom =  $(this).find('.f-body').attr('data-mailFrom');
 		    var $_mailTo =  $(this).find('.f-body').attr('data-mailTo');
 		    var $_mailCC =  $(this).find('.f-body').attr('data-mailCC');
@@ -1279,7 +1279,7 @@ $(document).ready(function() {
 			// Save And Reply Save
 			$('#btn-reply-save').show();
 			$('#btn-fwd-save').hide();
-			$('#btn-save').hide();		
+			$('#btn-save').hide();
 
 			var $_mailFrom =  $(this).parents('.mail-content-container').attr('data-mailFrom');
 		    var $_mailTo =  $(this).parents('.mail-content-container').attr('data-mailTo');
@@ -1336,5 +1336,5 @@ $(document).ready(function() {
 	  $(this).parents('.mail-box-container').find('.tab-title').removeClass('mail-menu-show')
 	  $(this).parents('.mail-box-container').find('.mail-overlay').removeClass('mail-overlay-show')
 	})
-	
+
 });
