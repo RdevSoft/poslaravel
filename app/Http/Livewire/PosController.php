@@ -16,7 +16,7 @@ class PosController extends Component
         $this->efectivo = 0;
         $this->change = 0;
         $this->total = Cart::getTotal();
-        $this->itemQuantity = Cart::getTotalQuanity();
+        $this->itemQuantity = Cart::getTotalQuantity();
     }
 
     public function render()
@@ -232,7 +232,7 @@ class PosController extends Component
                 $this->efectivo = 0;
                 $this->change = 0;
                 $this->total = Cart::getTotal();
-                $this->itemQuantity = Cart::getTotalQuanity();
+                $this->itemQuantity = Cart::getTotalQuantity();
                 $this->emit('sale-ok', 'Venta registrada con exito!');
                 $this->emit('print-ticket', $sale->id);
 
