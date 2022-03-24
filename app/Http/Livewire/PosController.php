@@ -7,6 +7,7 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 use DB;
 use Livewire\Component;
 
+
 class PosController extends Component
 {
     public $total, $itemQuantity, $efectivo, $change;
@@ -31,7 +32,7 @@ class PosController extends Component
             ->section('content');
     }
 
-    public function Acash($value)
+    public function ACash($value)
     {
         $this->efectivo += ($value == 0 ? $this->total : $value);
         $this->change = $this->efectivo - $this->total;
@@ -46,7 +47,7 @@ class PosController extends Component
 
     public function ScanCode($barcode, $cant = 1)
     {
-        $product = Product::where('barcode', $barcpde)->first();
+        $product = Product::where('barcode', $barcode)->first();
         if ($product == null || empty($empty)) {
             $this->emit('scan-notfound', 'Producto no encontrado');
         } else {
