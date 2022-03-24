@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<script src="{{ asset('asset/js/keypress.js') }}"></script>
+<script src="{{ asset('assets/js/keypress.js') }}"></script>
 <script src="{{ asset('assets/js/onscan.js') }}"></script>
 
 <script>
