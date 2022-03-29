@@ -146,7 +146,7 @@ class ProductsController extends Component
 
         $product = Product::find($this->selected_id); //buscamos primero el producto, almacenamos el id en la variable $product
 
-        $product->update([ //cambiamos a update, modificando 
+        $product->update([ //cambiamos a update, modificando
             'name' => $this->name,
             'cost' => $this->cost,
             'price' => $this->price,
@@ -175,7 +175,7 @@ class ProductsController extends Component
         $this->resetUI();
         $this->emit('product-updated', 'Producto Actualizado');
     }
-    
+
     public function resetUI() {
         $this->name ='';
 		$this->barcode ='';

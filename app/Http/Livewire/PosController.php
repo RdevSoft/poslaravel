@@ -2,10 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Denomination;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
-use DB;
+use App\Models\Denomination;
+use App\Models\SaleDetail;
 use Livewire\Component;
+
+use App\Traits\CartTrait;
+use App\Models\Product;
+use App\Models\Sale;
+use DB;
 
 
 class PosController extends Component
@@ -39,7 +44,7 @@ class PosController extends Component
     }
 
     protected $listeners = [
-        'scan-code' => 'scanCode',
+        'scan-code' => 'ScanCode',
         'removeItem' => 'removeItem',
         'clearCart' => 'clearCart',
         'saveSale' => 'saveSale'
@@ -47,12 +52,13 @@ class PosController extends Component
 
     public function ScanCode($barcode, $cant = 1)
     {
+
         $product = Product::where('barcode', $barcode)->first();
-        if ($product == null || empty($empty)) {
+        if ($product == null || empty($product)) {
             $this->emit('scan-notfound', 'Producto no encontrado');
         } else {
             if ($this->InCart($product->id)) {
-                $this->increasyQty($product->id);
+                $this->increaseQty($product->id);
                 return;
             }
 
@@ -81,7 +87,7 @@ class PosController extends Component
 
     /**actualizar existencia del producto en el carrito*/
 
-    public function increasyQty($productId)
+    public function increaseQty($productId)
     {
         $exist = Cart::get($productId, $cant = 1);
         {
@@ -99,13 +105,12 @@ class PosController extends Component
                     return;
                 }
             }
-            Cart:
-            add($product->id, $product->name, $product->price, $cant, $product->image);
+            Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
 
             /**actualizar el total del carrito*/
 
             $this->total = Cart::getTotal();
-            $this->itemQuantity = Cart::getTotalQuanity();
+            $this->itemQuantity = Cart::getTotalQuantity();
 
             $this->emit('scan-ok', $title);
         }
@@ -134,7 +139,7 @@ class PosController extends Component
         if ($cant > 0) {
             Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
             $this->total = Cart::getTotal();
-            $this->itemQuantity = Cart::getTotalQuanity();
+            $this->itemQuantity = Cart::getTotalQuantity();
             $this->emit('scan-ok', $title);
         } else
             $this->emit('scan-error', 'La cantidad debe ser mayor a 0');
@@ -144,7 +149,7 @@ class PosController extends Component
     {
         Cart::remove($productId);
         $this->total = Cart::getTotal();
-        $this->itemQuantity = Cart::getTotalQuanity();
+        $this->itemQuantity = Cart::getTotalQuantity();
         $this->emit('scan-ok', 'Producto eliminado');
     }
 
@@ -157,7 +162,7 @@ class PosController extends Component
         if ($newQty > 0) {
             Cart::add($item->id, $item->name, $item->price, $newQty, $item->image);
             $this->total = Cart::getTotal();
-            $this->itemQuantity = Cart::getTotalQuanity();
+            $this->itemQuantity = Cart::getTotalQuantity();
             $this->emit('scan-ok', 'Cantidad actualizada');
 
 
@@ -173,7 +178,7 @@ class PosController extends Component
         $this->change = 0;
         $this->total = 0;
         $this->total = Cart::getTotal();
-        $this->itemQuantity = Cart::getTotalQuanity();
+        $this->itemQuantity = Cart::getTotalQuantity();
         $this->emit('scan-ok', 'Carrito vaciado');
     }
 

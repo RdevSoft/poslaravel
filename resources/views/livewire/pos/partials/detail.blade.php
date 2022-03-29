@@ -31,7 +31,7 @@
                         <td><h6>{{$item->name}}</h6></td>
                         <td class="text-center">${{number_format($item->price,2)}}</td>
                         <td>
-                            <input type="number" id="r{{$item->id}}" wire:change="updateQty({{$ite->id}},
+                            <input type="number" id="r{{$item->id}}" wire:change="updateQty({{$item->id}},
                                     $('#r' + {{$item->id}}).val() )" style="font-size: 1rem!important"
                             class="form-control text-center" value = "{{$item->quantity}}">
 
@@ -47,12 +47,12 @@
                                 <i class="fas fa-trash-alt"></i>
                             </button>
 
-                            <button wireclick:click.prevent="decreaseQty({{$item->id}})" class="btn btn-dark mbmobile">
+                            <button wire:click.prevent="decreaseQty({{$item->id}})" class="btn btn-dark mbmobile">
                                 <i class="fas fa-minus"></i>
                             </button>
 
-                            <button wireclick:click.prevent="increaseQty({{$item->id}})" class="btn btn-dark mbmobile">
-                                <i class="fas fa-minus"></i>
+                            <button wire:click.prevent="increaseQty({{$item->id}})" class="btn btn-dark mbmobile">
+                                <i class="fas fa-plus"></i>
                             </button>
                         </td>
                     </tr>
