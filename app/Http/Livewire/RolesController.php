@@ -13,7 +13,7 @@ class RolesController extends Component
 {
     use WithPagination;
 
-    public $roleName, $search, $select_id, $pageTitle, $componentName;
+    public $roleName, $search, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
 
     public function paginationView()
@@ -65,7 +65,7 @@ class RolesController extends Component
     public function Edite($id)
     {
         $role = Role::find($id);
-        $this->select_id = $role->id;
+        $this->selected_id = $role->id;
         $this->roleName = $role->name;
 
         $this->emit('show-modal', 'Show modal');
@@ -73,7 +73,7 @@ class RolesController extends Component
     /** edit aconsejable para editar */
     public function Edit(Role $role)
     {
-        $this->select_id = $role->id;
+        $this->selected_id = $role->id;
         $this->roleName = $role->name;
 
         $this->emit('show-modal', 'Show modal');
@@ -81,7 +81,7 @@ class RolesController extends Component
 
     public function UpdateRole()
     {
-        $rules = ['roleName' => 'required|min:2|unique:roles, name, {$this->select_id}'];
+        $rules = ['roleName' => 'required|min:2|unique:roles, name, {$this->selected_id}'];
 
         $messages = [
         'roleName.required' => 'El nombre del rol es requerido',
@@ -90,7 +90,7 @@ class RolesController extends Component
     ];
        $this->validate($rules, $messages);
 
-        $role = Role::find($this->select_id);
+        $role = Role::find($this->selected_id);
         $role->name = $this->roleName;
         $role->save();
 
@@ -113,10 +113,10 @@ class RolesController extends Component
 
     }
 
-    publinc function resetUI()
+    public function resetUI()
     {
         $this->roleName = '';
         $this->search = '';
-        $this->select_id = 0;
+        $this->selected_id = 0;
     }
 }

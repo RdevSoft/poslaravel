@@ -23,11 +23,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach
+                        @foreach($roles as $role)
                             <tr>
                                 <td><h6>{{$role->id}}</h6></td>
                                 <td class="text-center">
-                                    <h6>{{role->name}}</h6>
+                                    <h6>{{$role->name}}</h6>
                                 </td>
 
                                 <td class="text-center">
@@ -46,45 +46,45 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{roles->links()}}
+                    {{$roles->links()}}
                 </div>
             </div>
         </div>
     </div>
 
-    @include ('livewire.roles.form')
+    @include('livewire.roles.form')
 
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        windows.livewire.on('roles-added', Msg => {
+        window.livewire.on('role-added', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
 
-        windows.livewire.on('roles-updated', Msg => {
+        window.livewire.on('role-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
 
-        windows.livewire.on('roles-deleted', Msg => {
+        window.livewire.on('role-deleted', Msg => {
             noty(Msg)
         })
 
-        windows.livewire.on('roles-exists', Msg => {
+        window.livewire.on('role-exists', Msg => {
             noty(Msg)
         })
 
-        windows.livewire.on('roles-error', Msg => {
+        window.livewire.on('role-error', Msg => {
             noty(Msg)
         })
 
-        windows.livewire.on('hide-modal', Msg => {
+        window.livewire.on('hide-modal', Msg => {
             $('#theModal').modal('hide')
         })
 
-        windows.livewire.on('show-added', Msg => {
+        window.livewire.on('show-added', Msg => {
             $('#theModal').modal('show')
         })
     });
