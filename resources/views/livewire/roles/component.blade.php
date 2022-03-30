@@ -18,8 +18,8 @@
                         <thead class="text-white" style="background: #3B3F5C">
                         <tr>
                             <th class="table-th text-white">ID</th>
-                            <th class="table-th text-white">DESCRIPCION</th>
-                            <th class="table-th text-white">ACTIONS</th>
+                            <th class="table-th text-white text-center">DESCRIPCION</th>
+                            <th class="table-th text-white text-center">ACTIONS</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -31,14 +31,15 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" wire:click="Edit({{$role->id}}})" class="btn btn-dark mtmobile"
-                                       title="Editar
-                                    Registro">
+                                    <a href="javascript:void(0)"
+                                       wire:click="Edit({{$role->id}})"
+                                       class="btn btn-dark mtmobile" title="Editar Registro">
                                         <i class="fas fa-edit"></i>
                                     </a>
 
-                                    <a href="javascript:void(0)" onclick="Confirm('{{$role->id}}')" class="btn btn-dark" title="Eliminar
-                                    Registro">
+                                    <a href="javascript:void(0)"
+                                       onclick="Confirm('{{$role->id}}')"
+                                       class="btn btn-dark" title="Eliminar Registro">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -57,34 +58,28 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         window.livewire.on('role-added', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
-
         window.livewire.on('role-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
-
         window.livewire.on('role-deleted', Msg => {
             noty(Msg)
         })
-
         window.livewire.on('role-exists', Msg => {
             noty(Msg)
         })
-
         window.livewire.on('role-error', Msg => {
             noty(Msg)
         })
-
         window.livewire.on('hide-modal', Msg => {
             $('#theModal').modal('hide')
         })
-
-        window.livewire.on('show-added', Msg => {
+        window.livewire.on('show-modal', Msg => {
             $('#theModal').modal('show')
         })
     });
@@ -106,7 +101,7 @@
 
         }).then(function (result) {
             if (result.value) {
-                window.livewire.emit('deleteRow', id)
+                window.livewire.emit('destroy', id)
                 swal.close()
             }
         })

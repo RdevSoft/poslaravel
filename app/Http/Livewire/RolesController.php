@@ -24,13 +24,14 @@ class RolesController extends Component
     /** Nombre de pagina de titulo y componente */
     public function mount()
     {
-        $this->pageTitle = 'Roles';
-        $this->componentName = 'roles';
+        $this->pageTitle = 'Listado';
+        $this->componentName = 'Roles';
     }
 
     public function render()
     {
-        if (strlen($this->search) > 0) /**todos los roles a traves del nombre que coincidan con el texto que el usuario ingreso */
+        /**todos los roles a traves del nombre que coincidan con el texto que el usuario ingreso */
+        if(strlen($this->search) > 0)
             $roles = Role::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
         else
             $roles = Role::orderBy('name', 'asc')->paginate($this->pagination);
@@ -38,13 +39,13 @@ class RolesController extends Component
         return view('livewire.roles.component', [
             'roles' => $roles
         ])
-            ->extends('layouts.app')
+            ->extends('layouts.theme.app')
             ->section('content');
     }
 
     public function CreateRole()
     {
-        $rules = ['roleName' => 'required|min:2|unique:roles, name'];
+        $rules = ['roleName' => 'required|min:2|unique:roles,name'];
 
         $messages = [
             'roleName.required' => 'El nombre del rol es requerido',
@@ -81,13 +82,13 @@ class RolesController extends Component
 
     public function UpdateRole()
     {
-        $rules = ['roleName' => 'required|min:2|unique:roles, name, {$this->selected_id}'];
+        $rules = ['roleName' => 'required|min:2|unique:roles,name, {$this->selected_id}'];
 
         $messages = [
         'roleName.required' => 'El nombre del rol es requerido',
         'roleName.unique' => 'El nombre del rol ya existe',
         'roleName.min' => 'El nombre del rol debe tener al menos 2 caracteres'
-    ];
+        ];
        $this->validate($rules, $messages);
 
         $role = Role::find($this->selected_id);
